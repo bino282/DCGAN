@@ -25,7 +25,6 @@ from tqdm import tqdm
 data_dir = "../local/gan/root_data/animeface-character-dataset/thumb"
 faceCascade = cv2.CascadeClassifier('../local/gan/cascade/lbpcascade_animeface.xml')
 output_dir = "../local/data_dir"
-file_name = "mk"
 crop_size = (64,64)
 only_color = True
 
