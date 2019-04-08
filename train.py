@@ -9,6 +9,7 @@ from model import *
 from collections import deque
 import imageio
 import matplotlib.pyplot as plt
+import matplotlib.gridspec as gridspec
 def norm_img(img):
     img = (img / 127.5) - 1
     return img
