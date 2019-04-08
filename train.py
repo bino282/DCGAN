@@ -60,7 +60,7 @@ num_steps = 10000
 batch_size = 128
 img_save_dir = '../local/img_save_dir/'
 model_saved_dir = '../local/model_saved/'
-log_dir = img_save_dir
+log_dir = '../local/logs/'
 image_shape = (64,64,3)
 data_dir =  "../local/gan/data_dir/*.png"
 discriminator = discriminator_model(image_shape)
@@ -102,7 +102,7 @@ for step in range(num_steps):
     discriminator.trainable = False
     gan_metrics = gan.train_on_batch(GAN_X,GAN_Y)
     print("GAN loss: %f" % (gan_metrics[0]))
-    text_file = open(log_dir+"\\training_log.txt", "a")
+    text_file = open(log_dir+"training_log.txt", "a")
     text_file.write("Step: %d Disc: real loss: %f fake loss: %f GAN loss: %f\n" % (tot_step, dis_metrics_real[0], dis_metrics_fake[0],gan_metrics[0]))
     text_file.close()
     avg_GAN_loss.append(gan_metrics[0])
