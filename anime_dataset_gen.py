@@ -36,6 +36,7 @@ for count,filename in enumerate(tqdm(os.listdir(data_dir))):
     path_character = os.path.join(data_dir,filename)
     list_file = os.listdir(path_character)
     for img in list_file:
+        print (os.path.join(path_character,img))
         image = cv2.imread(os.path.join(path_character,img))
         if image is not None:
             gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) 
