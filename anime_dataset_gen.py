@@ -47,6 +47,7 @@ for count,filename in enumerate(tqdm(os.listdir(data_dir))):
                                                 minNeighbors = 5,
                                                 minSize = (90, 90))
             #if any faces are detected, we only extract the biggest detected region
+            print(len(faces))
             if len(faces) == 0:
                 continue
             elif len(faces) > 1:
