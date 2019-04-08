@@ -27,36 +27,38 @@ faceCascade = cv2.CascadeClassifier('../local/gan/cascade/lbpcascade_animeface.x
 output_dir = "../local/data_dir"
 crop_size = (64,64)
 only_color = True
-
+file_name = 'mk'
 def biggest_rectangle(r):
     #return w*h
     return r[2]*r[3]
 
 for count,filename in enumerate(tqdm(os.listdir(data_dir))):
-    print(filename)
-    image = cv2.imread(data_dir+filename)
-    if image is not None:
-        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) 
-        gray = cv2.equalizeHist(gray)
-        # detector options
-        faces = faceCascade.detectMultiScale(gray,
-                                             scaleFactor = 1.01,
-                                             minNeighbors = 5,
-                                             minSize = (90, 90))
-        #if any faces are detected, we only extract the biggest detected region
-        if len(faces) == 0:
-            continue
-        elif len(faces) > 1:
-            sorted(faces, key=biggest_rectangle, reverse=True)
-            
-        if only_color and (Image.fromarray(image).convert('RGB').getcolors() is not None):
-            continue
-            
-        x, y, w, h = faces[0]
-        #cv2.rectangle(image, (x, y), (x + w, y + h), (0, 0, 255), 2)
-        cropped_image = image[y:y + h, x:x + w,:]
-        resized_image = cv2.resize(cropped_image, crop_size)
-        cv2.imwrite(output_dir+str(count)+file_name+".png", resized_image)
+    path_character = os.path.join(data_dir,filename)
+    list_file = os.listdir(path_character)
+    for img in list_file:
+        image = cv2.imread(os.path.join(path_character,img))
+        if image is not None:
+            gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) 
+            gray = cv2.equalizeHist(gray)
+            # detector options
+            faces = faceCascade.detectMultiScale(gray,
+                                                scaleFactor = 1.01,
+                                                minNeighbors = 5,
+                                                minSize = (90, 90))
+            #if any faces are detected, we only extract the biggest detected region
+            if len(faces) == 0:
+                continue
+            elif len(faces) > 1:
+                sorted(faces, key=biggest_rectangle, reverse=True)
+                
+            if only_color and (Image.fromarray(image).convert('RGB').getcolors() is not None):
+                continue
+                
+            x, y, w, h = faces[0]
+            #cv2.rectangle(image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+            cropped_image = image[y:y + h, x:x + w,:]
+            resized_image = cv2.resize(cropped_image, crop_size)
+            cv2.imwrite(output_dir+str(count)+img.split('.')[0]+".png", resized_image)
 
 
 """
