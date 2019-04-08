@@ -58,9 +58,9 @@ def sample_from_dataset(batch_size, image_shape, data_dir=None, data = None):
 noise_shape = (1,1,100)
 num_steps = 10000
 batch_size = 128
-img_save_dir = '../local/img_save_dir/'
-model_saved_dir = '../local/model_saved/'
-log_dir = '../local/logs/'
+img_save_dir = '../local/gan/img_save_dir/'
+model_saved_dir = '../local/gan/model_saved/'
+log_dir = '../local/gan/logs/'
 image_shape = (64,64,3)
 data_dir =  "../local/gan/data_dir/*.png"
 discriminator = discriminator_model(image_shape)
