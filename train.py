@@ -57,8 +57,9 @@ def sample_from_dataset(batch_size, image_shape, data_dir=None, data = None):
     return sample
 noise_shape = (1,1,100)
 num_steps = 10000
-batch_size = 64
+batch_size = 128
 img_save_dir = '../local/img_save_dir/'
+model_saved_dir = '../local/model_saved/'
 log_dir = img_save_dir
 image_shape = None
 data_dir =  "../local/gan/data_dir/*.png"
@@ -109,7 +110,8 @@ for step in range(num_steps):
     diff_time = int(end_time - step_begin_time)
     print("Step %d completed. Time took: %s secs." % (tot_step, diff_time))
 
-
+generator.save(model_saved_dir+'generator_model.h5')
+discriminator.save(model_saved_dir+'discriminator_model.h5')
 #generate final sample images
 for i in range(10):
     generate_images(generator, img_save_dir)
