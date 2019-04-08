@@ -24,7 +24,7 @@ from tqdm import tqdm
 
 data_dir = "../local/gan/root_data/animeface-character-dataset/thumb"
 faceCascade = cv2.CascadeClassifier('../local/gan/cascade/lbpcascade_animeface.xml')
-output_dir = "../local/data_dir"
+output_dir = "../local/gan/data_dir"
 crop_size = (64,64)
 only_color = True
 file_name = 'mk'
@@ -36,7 +36,6 @@ for count,filename in enumerate(tqdm(os.listdir(data_dir))):
     path_character = os.path.join(data_dir,filename)
     list_file = os.listdir(path_character)
     for img in list_file:
-        print (os.path.join(path_character,img))
         image = cv2.imread(os.path.join(path_character,img))
         if image is not None:
             # gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) 
