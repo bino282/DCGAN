@@ -39,27 +39,27 @@ for count,filename in enumerate(tqdm(os.listdir(data_dir))):
         print (os.path.join(path_character,img))
         image = cv2.imread(os.path.join(path_character,img))
         if image is not None:
-            gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) 
-            gray = cv2.equalizeHist(gray)
+            # gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) 
+            # gray = cv2.equalizeHist(gray)
             # detector options
-            faces = faceCascade.detectMultiScale(gray,
-                                                scaleFactor = 1.01,
-                                                minNeighbors = 5,
-                                                minSize = (90, 90))
-            #if any faces are detected, we only extract the biggest detected region
-            print(len(faces))
-            if len(faces) == 0:
-                continue
-            elif len(faces) > 1:
-                sorted(faces, key=biggest_rectangle, reverse=True)
+            # faces = faceCascade.detectMultiScale(gray,
+            #                                     scaleFactor = 1.01,
+            #                                     minNeighbors = 5,
+            #                                     minSize = (90, 90))
+            # #if any faces are detected, we only extract the biggest detected region
+            # print(len(faces))
+            # if len(faces) == 0:
+            #     continue
+            # elif len(faces) > 1:
+            #     sorted(faces, key=biggest_rectangle, reverse=True)
                 
-            if only_color and (Image.fromarray(image).convert('RGB').getcolors() is not None):
-                continue
+            # if only_color and (Image.fromarray(image).convert('RGB').getcolors() is not None):
+            #     continue
                 
-            x, y, w, h = faces[0]
-            #cv2.rectangle(image, (x, y), (x + w, y + h), (0, 0, 255), 2)
-            cropped_image = image[y:y + h, x:x + w,:]
-            resized_image = cv2.resize(cropped_image, crop_size)
+            # x, y, w, h = faces[0]
+            # #cv2.rectangle(image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+            # cropped_image = image[y:y + h, x:x + w,:]
+            resized_image = cv2.resize(image, crop_size)
             cv2.imwrite(output_dir+str(count)+img.split('.')[0]+".png", resized_image)
 
 
