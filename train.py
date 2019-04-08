@@ -109,19 +109,6 @@ for step in range(num_steps):
     end_time = time.time()
     diff_time = int(end_time - step_begin_time)
     print("Step %d completed. Time took: %s secs." % (tot_step, diff_time))
-    if(step%500==0):
-        #generate final sample images
-        for i in range(10):
-            generate_images(generator, img_save_dir)
-
-        #Generating GIF from PNG
-        images = []
-        all_data_dirlist = list(glob.glob(img_save_dir+"*_image.png"))
-        for filename in all_data_dirlist:
-            img_num = filename.split('\\')[-1][0:-10]
-            if (int(img_num) % 100) == 0:
-                images.append(imageio.imread(filename))
-        imageio.mimsave(img_save_dir+'movie.gif', images)     
 
 generator.save(model_saved_dir+'generator_model.h5')
 discriminator.save(model_saved_dir+'discriminator_model.h5')
