@@ -34,6 +34,7 @@ def biggest_rectangle(r):
     return r[2]*r[3]
 
 for count,filename in enumerate(tqdm(os.listdir(data_dir))):
+    print(file_name)
     image = cv2.imread(data_dir+filename)
     if image is not None:
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) 
